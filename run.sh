@@ -13,6 +13,7 @@ fi
 ## If the mounted extensions volume is empty, populate it from the default data
 if ! [[ -d $SONAR_HOME/data/plugins ]]; then
 	cp -a $SONAR_HOME/extensions-init/plugins $SONAR_HOME/data/plugins
+        
 fi
 
 ## Link the plugins directory from the mounted volume
@@ -24,6 +25,7 @@ if [ "${1:0:1}" != '-' ]; then
 fi
 
 #chown -R 0:0 $SONAR_HOME && chmod -R g+rwX $SONAR_HOME
+chown -R sonar:sonar $SONAR_HOME
 
 set
 
