@@ -63,3 +63,5 @@ ENTRYPOINT ["./bin/run.sh"]
 
 # Http port
 EXPOSE 9000
+
+USER 212
