@@ -22,21 +22,17 @@ ENV JAVA_HOME=/usr/lib/jvm/jre-openjdk \
 
 RUN adduser -d $SONARQUBE_HOME -M -r -s /bin/bash -u 212 -U $SONARQUBE_USER
 
-ADD D26468DE.asc $SONARQUBE_HOME/D26468DE.asc
+ADD D26468DE.asc /tmp/D26468DE.asc
 
-RUN set -x \
-
-    && gpg --import $SONARQUBE_HOME/D26468DE.asc \
-
+RUN gpg --import /tmp/D26468DE.asc \
     && cd /home \
-    && curl -o sonarqube.zip -fSL https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip \
-    && curl -o sonarqube.zip.asc -fSL https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip.asc \
-    && gpg --batch --verify sonarqube.zip.asc sonarqube.zip \
-    && unzip sonarqube.zip \
-    && mv sonarqube-$SONAR_VERSION $SONARQUBE_HOME \
-    && rm -r sonarqube.zip* \
+    && curl -o /tmp/sonarqube.zip -fSL https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip \
+    && curl -o /tmp/sonarqube.zip.asc -fSL https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip.asc \
+    && gpg --batch --verify /tmp/sonarqube.zip.asc /tmp/sonarqube.zip \
+    && unzip -d /home /tmp/sonarqube.zip \
+    && mv /home/sonarqube-$SONAR_VERSION $SONARQUBE_HOME \
+    && rm -f /tmp/sonarqube.zip* \
     && rm -rf $SONARQUBE_HOME/bin/*
-
 
 VOLUME "$SONARQUBE_HOME/data"
 
