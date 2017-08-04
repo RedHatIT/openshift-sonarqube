@@ -53,6 +53,8 @@ RUN $SONARQUBE_HOME/bin/plugins.sh pmd gitlab github ldap
 
 RUN chown -R $SONARQUBE_USER:$SONARQUBE_USER $SONARQUBE_HOME
 
+RUN chmod 777 $SONARQUBE_HOME/data
+
 ENTRYPOINT ["./bin/run.sh"]
 
 # Http port
