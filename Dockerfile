@@ -8,7 +8,7 @@ RUN yum repolist --disablerepo=* && \
     yum-config-manager --enable rhel-7-server-rpms > /dev/null
 
 RUN yum update -y \
-  && yum install -y unzip curl tar java-1.8.0-openjdk.x86_64 gnupg2 \
+  && yum install -y telnet postgresql unzip curl tar java-1.8.0-openjdk.x86_64 gnupg2 \
   && yum clean all \
   && rm -rf /var/cache/yum
 
