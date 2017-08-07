@@ -25,7 +25,6 @@ if [ "${1:0:1}" != '-' ]; then
 fi
 
 #chown -R 0:0 $SONAR_HOME && chmod -R g+rwX $SONAR_HOME
-chown -R sonar:sonar $SONAR_HOME
 
 set
 

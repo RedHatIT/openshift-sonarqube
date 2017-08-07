@@ -9,7 +9,8 @@ RUN yum repolist --disablerepo=* && \
 
 RUN yum update -y \
   && yum install -y unzip curl tar java-1.8.0-openjdk.x86_64 gnupg2 \
-  && yum clean all
+  && yum clean all \
+  && rm -rf /var/cache/yum
 
 # configure java runtime
 ENV JAVA_HOME=/usr/lib/jvm/jre-openjdk \
